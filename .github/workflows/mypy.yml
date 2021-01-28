@@ -26,12 +26,15 @@ jobs:
         with:
           python-version: "3.6"
 
-      - name: Install dependencies 🔧
+      - name: Install dependencies (Linux) 🔧
+        if: ${{ matrix.os == 'ubuntu-20.04' }}
         run: |
+          sudo apt update
+          sudo apt install libcairo2-dev pkg-config python3-dev libgirepository1.0-dev xserver-xorg-input-wacom libwacom2 libwacom-common
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install tox
+          python -m pip install --upgrade tox virtualenv
 
       - name: "Run mypy"
         run: "python -m tox -e mypy"
