@@ -57,7 +57,11 @@ class Button:
 
 		elements = (raw_string.strip('"').split('" "'))
 		id = elements[0]
-		mapping = elements[1]
+		try:
+			mapping = elements[1]
+		
+		except IndexError:
+			mapping = '0'
 
 		return cls(int(id), mapping)
 
